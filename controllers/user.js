@@ -1,5 +1,26 @@
 const User = require('../models/User');
-const erro
+const errorResponse = require('../utils/errorResponse');
+const asyncHandler = require('../middlewares/async');
+const path = require('path');
+
+
+// Get Signup Page
+// /api/v1/signup
+exports.getSignupPage = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if (req.cookies.token) {
+    token = req.cookies.token
+  }
+
+  //Make sure token exists
+  if (!token) {
+    res.render('signup')
+  } else {
+    res.redirect('/api/v1/profile')
+  }
+
+});
 
 
 
